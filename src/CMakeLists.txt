@@ -19,7 +19,7 @@ find_package(
 )
 
 # library definition
-add_library(${LIB_NAME} SHARED ${LIB_SRCS} ${LIB_HEADER})
+add_library(${LIB_NAME} ${INOTIFY_CPP_TYPE} ${LIB_SRCS} ${LIB_HEADER})
 
 set_target_properties(${LIB_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 
