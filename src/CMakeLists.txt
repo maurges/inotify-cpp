@@ -11,12 +11,8 @@ set(LIB_HEADER
 cmake_minimum_required(VERSION 3.8)
 project(${LIB_NAME} VERSION 0.0.1)
 
-# dependencies
-find_package(
-        Boost 1.54.0
-        COMPONENTS system filesystem
-        REQUIRED
-)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # library definition
 add_library(${LIB_NAME} ${INOTIFY_CPP_TYPE} ${LIB_SRCS} ${LIB_HEADER})
