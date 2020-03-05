@@ -1,8 +1,5 @@
 # Inotify-cpp #
 
-[![Build Status](https://travis-ci.org/erikzenker/inotify-cpp.svg?branch=master)](https://travis-ci.org/erikzenker/inotify-cpp) [![Coverity Scan Build Status](https://scan.coverity.com/projects/14692/badge.svg)](https://scan.coverity.com/projects/erikzenker-inotify-cpp) [![codecov](https://codecov.io/gh/erikzenker/inotify-cpp/branch/master/graph/badge.svg)](https://codecov.io/gh/erikzenker/inotify-cpp) [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/erikzenker)
-===========
-
 __Inotify-cpp__ is a C++ wrapper for linux inotify. It lets you watch for
 filesystem events on your filesystem tree. The following usage example shows
 the implementation of a simple filesystem event watcher for the commandline.
@@ -12,7 +9,7 @@ the implementation of a simple filesystem event watcher for the commandline.
   ```c++
 #include <inotify-cpp/NotifierBuilder.h>
 
-#include <boost/filesystem.hpp>
+#include <filesystem>
 
 #include <iostream>
 #include <thread>
@@ -28,7 +25,7 @@ int main(int argc, char** argv)
     }
 
     // Parse the directory to watch
-    boost::filesystem::path path(argv[1]);
+    std::filesystem::path path(argv[1]);
 
     // Set the event handler which will be used to process particular events
     auto handleNotification = [&](Notification notification) {
@@ -76,34 +73,32 @@ int main(int argc, char** argv)
 ```bash
 mkdir build; cd bulid
 cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ..
-cmake --build .
+make
 
 # run tests
+cmake INOTIFY_BUILD_TESTS=ON ..
 ctest -VV
 
 # install the library
-make install
+cmake INOTIFY_BUILD_SHARED_LIBS=ON ..
+make && make install
 ```
 
 ## Build Example ##
 Build and install the library before you run the following commands:
 ```bash
 mkdir build; cd build
-cmake ../example
+cmake INOTIFY_BUILD_EXAMPLES=ON ../example
 cmake --build inotify_example
 ./inotify_example
 ```
 
-## Install from Packet ##
-* Arch Linux: `yaourt -S inotify-cpp-git`
-
 ## Dependencies ##
  + lib
-   + boost 1.54.0
-   + c++11
+   + c++17
    + linux 2.6.13
  + build
-   + cmake 3.8  
+   + cmake 3.8
 
 ## Licence
 MIT
@@ -113,3 +108,4 @@ Written by Erik Zenker (erikzenker@hotmail.com)
 
 ## Thanks for Contribution ##
   + [spelcaster](https://github.com/spelcaster)
+  + [d86leader](https://github.com/d86leader)
